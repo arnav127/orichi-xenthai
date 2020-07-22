@@ -1,2 +1,2 @@
-# orichi-xenthai
+# Orichi-Xenthai
 Orichi Xenthai: Can you survive?
