@@ -1,0 +1,3 @@
+[submodule "src/mmaker"]
+	path = src/mmaker
+	url = https://github.com/arnav127/menumaker.git
