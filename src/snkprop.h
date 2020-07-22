@@ -1,6 +1,5 @@
-#include <iostream>
+#include <vector>
 #include "../src/mmaker/src/func.h"
-
 using namespace std;
 
 struct position
@@ -10,19 +9,24 @@ struct position
 
 class snk_prop
 {
-    vector< position >pos(1);
+    vector< position >pos;
     public:
+    position *head, *tail;
     snk_prop()
     {
-        pos[0].x=10;
-        pos[0].y=10;
+        position temp;
+        temp.x = 15;
+        temp.y = 15;
+        pos.push_back(temp);
+        head = &pos[0];
+        tail = &pos[0];
     }
-    pos move(int);
+    void move(int);
     void grow();
     bool self_collision();
 };
 
-pos snk_prop::move(int x)
+void snk_prop::move(int x)
 {
     for(int i=0; i < pos.size()-1 ; i++ )
     {
@@ -50,13 +54,14 @@ pos snk_prop::move(int x)
 void snk_prop::grow()
 {
     pos.push_back( pos[ pos.size()-1 ] );
+    tail++;
 }
 
 bool snk_prop::self_collision()
 {
     for(int i=1; i< pos.size(); i++)
     {
-        if(pos[0] == pos[i])
+        if(pos[0].x == pos[i].x and pos[0].y == pos[i].y)
         {
             return true;
         }
