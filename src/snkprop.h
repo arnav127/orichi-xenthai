@@ -1,5 +1,11 @@
 #include <vector>
 #include "../src/mmaker/src/func.h"
+
+#define XMAX getmax_x()-5
+#define YMAX getmax_y()-10
+#define XMIN 2
+#define YMIN 2
+
 using namespace std;
 
 struct position
@@ -9,13 +15,13 @@ struct position
 
 class snk_prop
 {
-    vector< position >pos;
+    vector< position >pos; 
     public:
     position *head, *tail;
     snk_prop()
     {
         position temp;
-        temp.x = 15;
+        temp.x = 35;
         temp.y = 15;
         pos.push_back(temp);
         head = &pos[0];
@@ -36,19 +42,26 @@ void snk_prop::move(int x)
     switch(x)
     {
         case 1:
-            pos[0].x = pos[1].x + 1;
+            head->y++;
             break;
         case 2:
-            pos[0].y = pos[1].y - 1;
+            head->x--;
             break;
         case 3:
-            pos[0].x = pos[1].x - 1;
+            head->y--;
             break;
         case 4:
-            pos[0].y = pos[1].y + 1;
+            head->x++;
             break;
     }
-
+    if(head->x < XMIN)
+        head->x = XMAX ;
+    if(head->x > XMAX )
+        head->x = XMIN;
+    if(head->y < YMIN)
+        head->y = YMAX;
+    if(head->y > YMAX )
+        head->y = YMIN;
 }
 
 void snk_prop::grow()
