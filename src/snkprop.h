@@ -15,20 +15,22 @@ struct position
 
 class snk_prop
 {
-    vector< position >pos; 
     public:
-    position *head, *tail;
+    vector< position >pos; 
+    int snk_size;
+    // position *head, *tail;
     snk_prop()
     {
         position temp;
         temp.x = 35;
         temp.y = 15;
         pos.push_back(temp);
-        head = &pos[0];
-        tail = &pos[0];
+        // head = &pos[0];
+        // tail = &pos[0];
+        snk_size = 1;
     }
     void move(int);
-    void grow();
+    void grow(int);
     bool self_collision();
 };
 
@@ -42,32 +44,47 @@ void snk_prop::move(int x)
     switch(x)
     {
         case 1:
-            head->y++;
+            pos[0].y++;
             break;
         case 2:
-            head->x--;
+            pos[0].x--;
             break;
         case 3:
-            head->y--;
+            pos[0].y--;
             break;
         case 4:
-            head->x++;
+            pos[0].x++;
             break;
     }
-    if(head->x < XMIN)
-        head->x = XMAX ;
-    if(head->x > XMAX )
-        head->x = XMIN;
-    if(head->y < YMIN)
-        head->y = YMAX;
-    if(head->y > YMAX )
-        head->y = YMIN;
+    if(pos[0].x < XMIN)
+        pos[0].x = XMAX ;
+    if(pos[0].x > XMAX )
+        pos[0].x = XMIN;
+    if(pos[0].y < YMIN)
+        pos[0].y = YMAX;
+    if(pos[0].y > YMAX )
+        pos[0].y = YMIN;
 }
 
-void snk_prop::grow()
+void snk_prop::grow(int x)
 {
-    pos.push_back( pos[ pos.size()-1 ] );
-    tail++;
+    pos.push_back( pos[ snk_size-1 ] );
+    snk_size++;
+    switch(x)
+    {
+        case 1:
+            pos[snk_size].y--;
+            break;
+        case 2:
+            pos[snk_size].x++;
+            break;
+        case 3:
+            pos[snk_size].y++;
+            break;
+        case 4:
+            pos[snk_size].x--;
+            break;
+    }
 }
 
 bool snk_prop::self_collision()
