@@ -1,5 +1,6 @@
-#include "../src/snkprop.h"
-//#include "../src/snk_food.h"
+// #include "../src/snkprop.h"
+#include "../src/snk_food.h"
+#include "../src/colors.h"
 #include<iostream>
 #include<vector>
 #include<unistd.h>
@@ -47,21 +48,53 @@ void input()
 
 void movement()
 {
+    snk_food apple;
+    gotoxy(apple.pos.x, apple.pos.y);
+    cout << blink << fgreen << '#' << colreset << flush;
     while(alive)
     {
-        gotoxy(snk.head->x, snk.head->y);
+        gotoxy(snk.pos[0].x, snk.pos[0].y);
         cout << "@" << flush;
         if(snk.self_collision() == true)
             alive = false;
         gotoxy(0, 0);
-        cout << ":" << flush;
+        cout << "Score = " << snk.snk_size << flush;
         if(direction == 1 or direction == 3)
             usleep(20000);
         if(direction == 2 or direction == 4)
             usleep(40000);
-        gotoxy(snk.tail->x, snk.tail->y);
+        gotoxy(snk.pos[snk.snk_size-1].x, snk.pos[snk.snk_size-1].y);
         cout << " " << flush;
+        
+        if(snk.pos[0].x == apple.pos.x and snk.pos[0].y == apple.pos.y)
+        {
+            gotoxy(apple.pos.x, apple.pos.y);
+            cout << " ";
+            apple.newpos();
+            gotoxy(apple.pos.x, apple.pos.y);
+            cout << blink << fred << '#' << colreset << flush;
+            snk.grow(direction);
+        }
         snk.move(direction);
+    }
+}
+void food()
+{
+    snk_food apple;
+    gotoxy(apple.pos.x, apple.pos.y);
+    cout << blink << fgreen << '#' << colreset << flush;
+    while(alive)
+    {
+        if(snk.pos[0].x == apple.pos.x and snk.pos[0].y == apple.pos.y)
+        {
+            gotoxy(apple.pos.x, apple.pos.y);
+            cout << " ";
+            apple.newpos();
+            gotoxy(apple.pos.x, apple.pos.y);
+            cout << blink << fred << '#' << colreset << flush;
+            snk.grow(direction);
+        }
+        
     }
 }
 void drawlvl()
@@ -85,8 +118,10 @@ void lvl1()
     drawlvl();
     thread th1 (input);
     thread th2 (movement);
+    // thread th3 (food);
     th1.join();
     th2.join();
+    // th3.join();
 }
 
 int main()
