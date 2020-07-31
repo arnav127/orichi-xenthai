@@ -17,7 +17,7 @@
 #define bcyan "\033[0;46m"
 #define bwhite "\033[0;47m"
 
-#define reset  "\033[0m"
+#define colreset  "\033[0m"
 #define bold "\033[1m"
 #define underline "\033[4m"
 #define blink "\033[5m"
