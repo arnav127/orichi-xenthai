@@ -13,19 +13,19 @@ int main()
     snk.add("NIGHTMARE", 5, "Snake cannot go through walls");
     snk.add("EXIT", 6);
     int op;
-    while(true)
+    while (true)
     {
         op = snk.display();
-        switch(op)
+        switch (op)
         {
-            case 1:
-                lvl1();
-                break;
-            case 6:
-                exit(0);
-                break;
-            default:
-                break;
+        case 1:
+            lvl1();
+            break;
+        case 6:
+            exit(0);
+            break;
+        default:
+            break;
         }
     }
     return 0;
