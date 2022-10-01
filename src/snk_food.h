@@ -1,21 +1,26 @@
 #include "snkprop.h"
 #include <stdlib.h>
 #include <time.h>
+#include <random>
 
 class snk_food
 {
 public:
     position pos;
+    uniform_int_distribution<> distr;
+    mt19937 gen;
     snk_food()
     {
-        srand(time(0));
-        pos.x = (rand() % (XMAX - XMIN)) + XMIN;
-        pos.y = (rand() % (YMAX - YMIN)) + YMIN;
+        random_device rd;
+        gen = mt19937(rd());
+        distr = uniform_int_distribution<>(XMIN, XMAX);
+
+        pos.x = distr(gen);
+        pos.y = distr(gen);
     }
     void newpos()
     {
-        gotoxy(XMAX, YMAX);
-        pos.x = (rand() % (XMAX - XMIN)) + XMIN;
-        pos.y = (rand() % (YMAX - YMIN)) + YMIN;
+        pos.x = distr(gen);
+        pos.y = distr(gen);
     }
 };
