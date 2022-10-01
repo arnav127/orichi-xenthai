@@ -27,7 +27,7 @@ class snk_prop
     void move(int);
     void grow(int);
     bool self_collision();
-    int size() {
+    int score() {
         return pos.size();
     }
 };
@@ -42,45 +42,45 @@ void snk_prop::move(int x)
     switch(x)
     {
         case 1:
-            pos[0].y++;
+            pos.front().y++;
             break;
         case 2:
-            pos[0].x--;
+            pos.front().x--;
             break;
         case 3:
-            pos[0].y--;
+            pos.front().y--;
             break;
         case 4:
-            pos[0].x++;
+            pos.front().x++;
             break;
     }
-    if(pos[0].x < XMIN)
-        pos[0].x = XMAX ;
-    if(pos[0].x > XMAX )
-        pos[0].x = XMIN;
-    if(pos[0].y < YMIN)
-        pos[0].y = YMAX;
-    if(pos[0].y > YMAX )
-        pos[0].y = YMIN;
+    if(pos.front().x < XMIN)
+        pos.front().x = XMAX ;
+    if(pos.front().x > XMAX )
+        pos.front().x = XMIN;
+    if(pos.front().y < YMIN)
+        pos.front().y = YMAX;
+    if(pos.front().y > YMAX )
+        pos.front().y = YMIN;
 }
 
 void snk_prop::grow(int x)
 {
-    pos.push_back( pos[ pos.size()-1 ] );
+    pos.push_back(pos.back());
     
     switch(x)
     {
         case 1:
-            pos[ pos.size()-1 ].y--;
+            pos.back().y--;
             break;
         case 2:
-            pos[ pos.size()-1 ].x++;
+            pos.back().x++;
             break;
         case 3:
-            pos[ pos.size()-1 ].y++;
+            pos.back().y++;
             break;
         case 4:
-            pos[ pos.size()-1 ].x--;
+            pos.back().x--;
             break;
     }
 }
@@ -89,7 +89,7 @@ bool snk_prop::self_collision()
 {
     for(int i=1; i< pos.size(); i++)
     {
-        if(pos[0].x == pos[i].x and pos[0].y == pos[i].y)
+        if(pos.front().x == pos[i].x and pos.front().y == pos[i].y)
         {
             return true;
         }

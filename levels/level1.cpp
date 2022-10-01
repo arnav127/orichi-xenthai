@@ -62,15 +62,15 @@ void movement()
 {
     while(alive)
     {
-        printtoscr(snk.pos[0].x, snk.pos[0].y, "@", fmagenta, bold);
-        if(snk.self_collision() == true)
+        printtoscr(snk.pos.front().x, snk.pos.front().y, "@", fmagenta, bold);
+        if(snk.self_collision())
             alive = false;
-        printtoscr(0, 9, to_string(snk.pos.size()));
+        printtoscr(0, 9, to_string(snk.score()));
         if(direction == 1 or direction == 3)
             usleep(30000);
         if(direction == 2 or direction == 4)
-            usleep(50000);
-        printtoscr(snk.pos[snk.pos.size()-1].x, snk.pos[snk.pos.size()-1].y, " ");
+            usleep(60000);
+        printtoscr(snk.pos.back().x, snk.pos.back().y, " ");
         snk.move(direction);
     }
 }
@@ -81,13 +81,13 @@ void food()
     printtoscr(apple.pos.x, apple.pos.y, "#", fgreen, blink2);
     while(alive)
     {
-        if(snk.pos[0].x == apple.pos.x and snk.pos[0].y == apple.pos.y)
+        if(snk.pos.front().x == apple.pos.x and snk.pos.front().y == apple.pos.y)
         {
             apple.newpos();
             printtoscr(apple.pos.x, apple.pos.y, "#", fgreen);
             snk.grow(direction);
         }
-        
+        usleep(30000);
     }
 }
 
