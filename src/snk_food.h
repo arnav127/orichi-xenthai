@@ -1,10 +1,10 @@
 #include "snkprop.h"
-#include <stdlib.h> 
-#include <time.h> 
+#include <stdlib.h>
+#include <time.h>
 
 class snk_food
 {
-    public:
+public:
     position pos;
     snk_food()
     {
