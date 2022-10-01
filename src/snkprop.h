@@ -17,7 +17,6 @@ class snk_prop
 {
     public:
     vector< position >pos; 
-    int snk_size;
     // position *head, *tail;
     snk_prop()
     {
@@ -27,7 +26,6 @@ class snk_prop
         pos.push_back(temp);
         // head = &pos[0];
         // tail = &pos[0];
-        snk_size = 1;
     }
     void move(int);
     void grow(int);
@@ -36,10 +34,10 @@ class snk_prop
 
 void snk_prop::move(int x)
 {
-    for(int i=0; i < pos.size()-1 ; i++ )
+    for(int i=pos.size()-1; i > 0 ; i-- )
     {
-        pos[i+1].x = pos[i].x;
-        pos[i+1].y = pos[i].y;
+        pos[i].x = pos[i-1].x;
+        pos[i].y = pos[i-1].y;
     }
     switch(x)
     {
@@ -68,21 +66,21 @@ void snk_prop::move(int x)
 
 void snk_prop::grow(int x)
 {
-    pos.push_back( pos[ snk_size-1 ] );
-    snk_size++;
+    pos.push_back( pos[ pos.size()-1 ] );
+    
     switch(x)
     {
         case 1:
-            pos[snk_size].y--;
+            pos[ pos.size()-1 ].y--;
             break;
         case 2:
-            pos[snk_size].x++;
+            pos[ pos.size()-1 ].x++;
             break;
         case 3:
-            pos[snk_size].y++;
+            pos[ pos.size()-1 ].y++;
             break;
         case 4:
-            pos[snk_size].x--;
+            pos[ pos.size()-1 ].x--;
             break;
     }
 }
