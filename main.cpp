@@ -1,5 +1,6 @@
 #include "src/mmaker/src/mmaker.h"
-#include "src/colors.h"
+#include "levels/level1.cpp"
+
 int main()
 {
     system("clear");
@@ -20,20 +21,8 @@ int main()
             case 1:
                 lvl1();
                 break;
-            case 2:
-                lvl2();
-                break;
-            case 3:
-                lvl3();
-                break;
-            case 4:
-                lvl4();
-                break;
-            case 5:
-                lvl5();
-                break;
             case 6:
-                quit();
+                exit(0);
                 break;
             default:
                 break;
