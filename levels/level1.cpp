@@ -43,6 +43,7 @@ void input()
                 break;
             
         }
+        usleep(30000);
     }
 }
 
@@ -58,24 +59,24 @@ void movement()
         if(snk.self_collision() == true)
             alive = false;
         gotoxy(0, 0);
-        cout << "Score = " << snk.snk_size << flush;
+        cout << "Score = " << snk.pos.size() << flush;
         if(direction == 1 or direction == 3)
-            usleep(20000);
+            usleep(30000);
         if(direction == 2 or direction == 4)
-            usleep(40000);
-        gotoxy(snk.pos[snk.snk_size-1].x, snk.pos[snk.snk_size-1].y);
+            usleep(50000);
+        gotoxy(snk.pos[snk.pos.size()-1].x, snk.pos[snk.pos.size()-1].y);
         cout << " " << flush;
         
         if(snk.pos[0].x == apple.pos.x and snk.pos[0].y == apple.pos.y)
         {
-            gotoxy(apple.pos.x, apple.pos.y);
-            cout << " ";
             apple.newpos();
             gotoxy(apple.pos.x, apple.pos.y);
-            cout << blink << fred << '#' << colreset << flush;
+            cout << blink << fgreen << '#' << colreset << flush;
             snk.grow(direction);
+            snk.move(direction);
         }
-        snk.move(direction);
+        else
+            snk.move(direction);
     }
 }
 void food()
@@ -101,14 +102,14 @@ void drawlvl()
 {
     system("clear");
     gotoxy(XMIN-1,YMIN-1);
+    cout << string(YMAX+YMIN, ':');
+    gotoxy(XMAX+1, YMIN);
     cout << string(YMAX+1, ':');
-    gotoxy(XMAX+1, 0);
-    cout << string(YMAX+1, ':');
-    for(int i=0;i<XMAX+2;i++)
+    for(int i=0;i<XMAX+XMIN;i++)
     {
         gotoxy(i, 0);
         cout << ":";
-        gotoxy(i, YMAX+1);
+        gotoxy(i, YMAX+YMIN);
         cout << ":";
         cout << flush;
     } 
@@ -121,6 +122,9 @@ void lvl1()
     // thread th3 (food);
     th1.join();
     th2.join();
+    for(auto x: snk.pos) {
+        cout << x.x << " " << x.y << "\n";
+    }
     // th3.join();
 }
 
