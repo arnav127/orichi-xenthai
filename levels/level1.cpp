@@ -124,11 +124,11 @@ void lvl1()
     // th3.join();
 }
 
-int main()
-{
-    lvl1();
-    return 0;
-}
+// int main()
+// {
+//     lvl1();
+//     return 0;
+// }
 
 
 /*
