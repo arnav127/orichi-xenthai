@@ -1,5 +1,5 @@
 #include "src/mmaker/src/mmaker.h"
-#include "levels/level1.cpp"
+#include "src/levels/level1.cpp"
 
 int main()
 {

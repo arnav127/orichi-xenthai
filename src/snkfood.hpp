@@ -1,4 +1,5 @@
-#include "snkprop.h"
+#pragma once
+#include "snkprop.hpp"
 #include <stdlib.h>
 #include <time.h>
 #include <random>

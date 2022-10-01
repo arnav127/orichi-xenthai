@@ -1,5 +1,6 @@
+#pragma once
 #include <vector>
-#include "../src/mmaker/src/func.h"
+#include "mmaker/src/func.h"
 
 #define XMAX getmax_x() - 5
 #define YMAX getmax_y() - 10
