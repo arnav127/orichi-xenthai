@@ -9,12 +9,13 @@ class snk_food
     snk_food()
     {
         srand(time(0));
-        pos.x = (rand() % XMAX) + XMIN;
-        pos.y = (rand() % YMAX) + YMIN;
+        pos.x = (rand() % (XMAX - XMIN)) + XMIN;
+        pos.y = (rand() % (YMAX - YMIN)) + YMIN;
     }
     void newpos()
     {
-        pos.x = (rand() % XMAX) + XMIN;
-        pos.y = (rand() % YMAX) + YMIN + 1;
+        gotoxy(XMAX, YMAX);
+        pos.x = (rand() % (XMAX - XMIN)) + XMIN;
+        pos.y = (rand() % (YMAX - YMIN)) + YMIN;
     }
 };
