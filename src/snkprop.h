@@ -3,8 +3,8 @@
 
 #define XMAX getmax_x()-5
 #define YMAX getmax_y()-10
-#define XMIN 2
-#define YMIN 2
+#define XMIN 4
+#define YMIN 4
 
 using namespace std;
 
@@ -17,19 +17,19 @@ class snk_prop
 {
     public:
     vector< position >pos; 
-    // position *head, *tail;
     snk_prop()
     {
         position temp;
         temp.x = 35;
         temp.y = 15;
         pos.push_back(temp);
-        // head = &pos[0];
-        // tail = &pos[0];
     }
     void move(int);
     void grow(int);
     bool self_collision();
+    int size() {
+        return pos.size();
+    }
 };
 
 void snk_prop::move(int x)
